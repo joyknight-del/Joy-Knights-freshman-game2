@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Castaway Commonwealth: Hobbes vs. Locke</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Karla:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e6ecee;--panel:#f7f9fa;--ink:#14232b;--mute:#4f6570;--line:#b9c8ce;--h:#8a2b2b;--l:#1f6b5c;--brass:#8f6a1c;--good:#1f6b5c;--bad:#8a2b2b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a20;--panel:#16262e;--ink:#e7eff1;--mute:#9bb2bb;--line:#2c434d;--h:#e07a6e;--l:#58c2a8;--brass:#d8b45a}}
+:root[data-theme="dark"]{--bg:#0e1a20;--panel:#16262e;--ink:#e7eff1;--mute:#9bb2bb;--line:#2c434d;--h:#e07a6e;--l:#58c2a8;--brass:#d8b45a}
+*{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 Karla,system-ui,sans-serif}
+main{max-width:720px;margin:0 auto;padding:18px 16px 48px}
+h1,h2{font-family:"Cormorant Garamond",Georgia,serif;line-height:1.1;margin:0}
+h1{font-size:2.3rem}h2{font-size:1.8rem;margin-bottom:8px}
+p{margin:0 0 12px;max-width:62ch}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px;margin-top:14px}
+.beam{margin-top:12px}
+.beamtrack{position:relative;height:10px;border-radius:5px;background:linear-gradient(90deg,var(--h),var(--line) 50%,var(--l))}
+.pin{position:absolute;top:-5px;width:6px;height:20px;border-radius:3px;background:var(--ink);transform:translateX(-50%);transition:left .6s}
+.beamlab{display:flex;justify-content:space-between;font-size:.85rem;color:var(--mute);margin-top:4px}
+.meters{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.m{font-size:.85rem;color:var(--mute)}
+.bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden;margin-top:3px}
+.bar i{display:block;height:100%;background:var(--brass);transition:width .5s}
+.chap{color:var(--mute);font-size:.9rem;margin-bottom:6px}
+button{font:inherit;color:inherit;cursor:pointer}
+.choice{display:block;width:100%;text-align:left;background:transparent;border:1.5px solid var(--line);border-radius:8px;padding:12px 14px;margin-top:10px}
+.choice:hover{border-color:var(--ink)}
+.choice small{display:block;color:var(--mute)}
+button:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+.go{background:var(--ink);color:var(--bg);border:0;border-radius:8px;padding:11px 20px;font-weight:700;margin-top:6px}
+.res{border-left:5px solid var(--good);padding:4px 0 4px 14px;margin:10px 0}
+.res.neg{border-color:var(--bad)}
+.note{background:var(--bg);border-radius:8px;padding:12px 14px;font-size:.95rem;margin:12px 0}
+.tag{font-weight:700}.tag.H{color:var(--h)}.tag.L{color:var(--l)}.tag.M{color:var(--brass)}
+.fx{font-size:.9rem;color:var(--mute);margin-bottom:8px}
+.ach{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px}
+.badge{border:1.5px solid var(--brass);border-radius:20px;padding:4px 12px;font-size:.9rem}
+.badge.lock{border-color:var(--line);color:var(--mute);border-style:dashed}
+.toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:24px;font-weight:700;max-width:90vw}
+.split{height:8px;border-radius:4px;margin-top:10px;background:linear-gradient(90deg,#c62f24,#7a1a2e 50%,#0b5f7a 50%,#12a58b)}.tg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.pc{border:0;border-radius:12px;padding:16px;text-align:left;color:#fff;min-height:160px;display:block;width:100%}.pc.h{background:linear-gradient(160deg,#c62f24,#7a1a2e)}.pc.l{background:linear-gradient(160deg,#12a58b,#0b5f7a)}.pc .ico{font-size:2.2rem;display:block}.pc b{display:block;font-family:"Cormorant Garamond",Georgia,serif;font-size:1.4rem}.pc .hint{opacity:.9;font-size:.9rem;border:1.5px dashed #fff;border-radius:20px;padding:2px 10px;display:inline-block;margin-top:8px}.pc p{margin:8px 0;font-size:.95rem}.viz{width:100%;max-height:120px}.viz text{fill:#fff;font:10px Karla,sans-serif;text-anchor:middle}.alt{background:transparent;color:var(--ink);border:1.5px solid var(--ink);margin-left:8px}.veil{position:fixed;inset:0;background:rgba(8,16,20,.65);display:flex;align-items:center;justify-content:center;padding:16px;z-index:5}.pop{background:var(--panel);border-radius:14px;padding:22px;max-width:420px;border-top:6px solid var(--brass)}.navs{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;align-items:center}.nt{border-left:5px solid var(--l);padding-left:12px;margin:10px 0}.nt.H{border-color:var(--h)}.nt.miss{border-color:var(--line);color:var(--mute)}.link{background:none;border:0;text-decoration:underline;padding:0}@media (max-width:520px){.tg{grid-template-columns:1fr}}
+.sig{text-align:right;font:8.5pt "Times New Roman",Times,serif;color:var(--mute);margin-top:18px;line-height:1.4}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (max-width:520px){.meters{grid-template-columns:repeat(2,1fr)}h1{font-size:2rem}}
+</style>
+</head>
+<body>
+<main>
+<div id="app"></div>
+</main>
+<script>
+var AL={contract:"Social Contractor",iron:"Iron Hand",labor:"Labor Theory",watch:"Watchdog",rebel:"Right to Rebel",both:"Both Philosophers",mix:"Compromiser",free:"Free Commonwealth",lev:"Leviathan Keeper"};
+var ADESC={contract:"Chose consent 3+ times",iron:"Chose strong authority 3+ times",labor:"Let labor create property",watch:"Limited the ruler’s power",rebel:"Let the people replace failing leaders",both:"Used both thinkers at least twice",mix:"Blended both ideas in your constitution",free:"Reached the best Locke-style ending",lev:"Reached a stable Hobbes-style ending"};
+var S;
+function fresh(){S={ch:0,o:5,l:5,t:5,w:5,H:0,L:0,M:0,log:[],ach:{},tags:{}}}
+function cl(v){return Math.max(0,Math.min(10,v))}
+
+var SC=[
+function(){return{t:"The State of Nature",x:"A storm wrecks your ship. Forty survivors reach an empty island. There are no laws, and someone is already stealing from the food stores. Everyone is armed and afraid. Hobbes warned that without a power to keep order, life is “solitary, poor, nasty, brutish, and short.” Locke thought people could be reasonable even without a ruler, as long as they respect each other’s natural rights. You are the governor. What now?",
+c:[{t:"Crown one leader with total authority",s:"Everyone obeys; nobody argues.",p:"H",fx:{o:3,l:-2},r:"The thefts stop within days. Armed guards patrol the stores and people sleep soundly. But nobody can question the leader, and nobody is sure how far the new power will go.",n:"Hobbes: people give up their freedoms to a sovereign in exchange for safety (the social contract). The contract is a trade, and the sovereign’s power must be absolute to work."},
+{t:"Call an assembly: everyone agrees on shared rules",s:"Each person keeps rights to life, liberty and property.",p:"L",fx:{l:3,o:-1,t:1},r:"The assembly argues for three hours, but people leave feeling heard. A few grumble that the rules are slow to enforce.",n:"Locke: people form government by consent to protect natural rights. Power comes from the governed."}]}},
+
+function(){if(S.log[0]=="H")return{t:"The Curfew Edict",x:"Your ruler bans gatherings after dark. A settler named Mara posts a note on the notice board: “Rulers should serve us, not the other way around.” Guards want her arrested.",
+c:[{t:"Jail Mara for defiance",s:"The sovereign’s word is law.",p:"H",fx:{o:1,t:-2,l:-1},r:"Mara is locked up. Gatherings stop and the camp goes quiet. It is the quiet of people who are afraid to speak.",n:"Hobbes argues subjects should not resist the sovereign, because disorder is worse than a harsh ruler."},
+{t:"Write a charter that limits the ruler’s powers",s:"Rules apply to the rulers too.",p:"L",fx:{l:2,t:1,o:-1},a:"watch",r:"The ruler grumbles but signs. Mara becomes the camp’s first elected speaker. Some guards feel their authority has shrunk.",n:"Locke: even rulers are bound by law. Government that ignores its limits loses legitimacy."}]};
+return{t:"The Thief at the Stores",x:"Tomas steals bread again. The assembly passed a rule against theft, but nobody has the power to enforce it. People are starting to hide their food and trust no one.",
+c:[{t:"Hire a captain who can punish anyone, no trial needed",s:"Fast and feared.",p:"H",fx:{o:2,l:-1,t:-1},r:"Theft drops sharply. The captain’s punishments, however, are sometimes harsh and sometimes unfair, and people notice.",n:"Hobbes: “covenants without the sword are but words.” Rules need a power that can enforce them."},
+{t:"Hold a citizen jury with agreed penalties",s:"Slower, but legitimate.",p:"L",fx:{l:1,t:2},a:"watch",r:"Tomas is judged by twelve neighbors and works extra shifts to repay the camp. Theft falls, and people trust the system.",n:"Locke: a neutral judge and known laws solve the flaws of the state of nature, where everyone judges their own case."}]}},
+
+function(){return{t:"The Orchard",x:"Ana spends months clearing a field and planting fruit trees. Others say the island belongs to everyone, so the harvest should be shared equally. Ana says it’s hers because she worked it.",
+c:[{t:"Ana keeps it: labor creates ownership",s:"As long as others have enough land too.",p:"L",fx:{w:3,l:1,t:-1},a:"labor",r:"Ana’s orchard feeds twelve people, and others copy her. The harvest booms. A few people who didn’t work as hard feel left behind.",n:"Locke: when you mix your labor with nature, you gain property in it. Protecting property is a main reason for government."},
+{t:"The ruler assigns plots to families",s:"Order and equal access.",p:"H",fx:{o:1,w:-1,t:1},r:"Nobody fights over land, and the poorest get their share. Output is steady but flat, since extra effort is not rewarded.",n:"Hobbes: the sovereign decides what is yours and what is mine. Without that, property claims lead to conflict."}]}},
+
+function(){var weak=S.o<=4;return{t:"Sails on the Horizon",x:weak?"Raiders spot a divided colony with no clear command and strike at dawn. Your people scramble in different directions.":"A raider ship approaches. Your people look to you for a defense plan.",
+c:[{t:"Give the ruler permanent control of all weapons",s:"One chain of command.",p:"H",fx:{o:2+(weak?1:0),l:-1},r:"The defense is swift and the raiders retreat. With every weapon in one hand, however, people wonder who could stop the ruler.",n:"Hobbes: a sovereign needs the power of the sword to protect everyone."},
+{t:"Raise a volunteer militia answerable to the council",s:"Defense by consent.",p:"L",fx:{l:1,t:1,o:weak?-1:0},r:weak?"The militia is brave but disorganized. You hold, with losses. People now believe the colony needs clearer command.":"The militia drives them off and then disbands. People are proud, and nobody feels ruled by an army.",n:"Locke: government is a trust. Power is lent for a purpose and can be taken back."}]}},
+
+function(){var angry=S.t<=4;return{t:"The Failed Harvest",x:angry?"Blight ruins the crops. Trust in leadership was already low, and a crowd now gathers demanding that the government step down.":"Blight ruins half the crops. Hunger spreads and some people blame the government.",
+c:[{t:"Suppress the protest to keep order",s:"A hungry camp must not tear itself apart.",p:"H",fx:{o:2,t:-2,l:-2},r:"The crowd disperses. Food is rationed by force and the camp holds together, but resentment settles in.",n:"Hobbes: no right to rebel against the sovereign, because civil war is the worst outcome."},
+{t:"Hold a vote: keep your leaders or replace them",s:"Let the people decide.",p:"L",fx:{l:2,t:2,o:-1},a:"rebel",r:"A new council is elected peacefully. The old leaders step down and help with rationing. The crisis ends without bloodshed.",n:"Locke: when rulers break the trust of the people, the people have the right to replace them."}]}},
+
+function(){return{t:"Write the Constitution",x:"The colony has survived. Now your people ask you to write down the permanent rules. What kind of government will they live under?",
+c:[{t:"One lasting sovereign, stability above all",s:"The safest design Hobbes could imagine.",p:"H",fx:{o:3,l:-2},r:"The constitution is short and clear: obey the sovereign.",n:"Hobbes: security first, liberty within the limits the sovereign allows."},
+{t:"Separate powers, written rights, elections",s:"The Lockean design.",p:"L",fx:{l:3,t:1,o:1},r:"The constitution lists rights and splits power between a council and courts.",n:"Locke: limited government with consent, protecting life, liberty and property."},
+{t:"Strong executive that answers to elections",s:"Blend both ideas.",p:"M",fx:{o:1,l:1,t:1},a:"mix",r:"You build a strong leader who must face voters and obey the courts. Both thinkers would find something to like and something to dislike.",n:"Many modern democracies mix Hobbes’s concern for security with Locke’s limits on power."}]}}
+];
+
+function ending(){var s=S,e;
+if(s.l>=6&&s.o>=5&&s.t>=6){e=["The Free Commonwealth","Your colony is secure and free. Laws protect people, and people can change the laws. Locke would call this legitimate government.","free"]}
+else if(s.o>=7&&s.l<=4){e=s.t>=5?["The Benevolent Leviathan","Peace and order reign and the sovereign is mostly fair. Still, people rarely speak up, and no one knows what happens if the ruler changes. Hobbes would nod; Locke would worry.","lev"]:["The Iron Colony","Order holds because of fear, and trust has drained away. Hobbes valued stability, but Locke would warn that a sovereign who loses the people’s trust invites revolt.","lev"]}
+else if(s.o<=4&&s.l<=4){e=["Collapse","Neither strong rule nor shared consent took hold. With no order and no freedom, the colony splinters. Hobbes’s state of nature has returned."]}
+else if(s.o<=4){e=["Liberty Without Order","People are free and proud, but laws are weakly enforced and disputes linger. Locke’s ideas need working institutions to succeed."]}
+else{e=["A Fragile Balance","Your colony works, but the balance between safety and freedom is delicate. A shock like a bad harvest or a new threat could tip it either way."]}
+return e}
+
+function bars(){var s=S,h=[["Order",s.o],["Liberty",s.l],["Trust",s.t],["Prosperity",s.w]];
+return '<div class="meters">'+h.map(function(m){return '<div class="m">'+m[0]+'<div class="bar"><i style="width:'+m[1]*10+'%"></i></div></div>'}).join('')+'</div>'}
+function beam(){var n=S.H+S.L,pos=n?50+((S.L-S.H)/n)*40:50;
+return '<div class="beam" aria-label="Your lean between Hobbes and Locke"><div class="beamtrack"><div class="pin" style="left:'+pos+'%"></div></div><div class="beamlab"><span>Hobbes: order</span><span>Locke: consent</span></div></div>'}
+function R(h){document.getElementById("app").innerHTML=h;window.scrollTo(0,0)}
+function head(){return '<h1>Castaway Commonwealth</h1>'+bars()+beam()}
+
+function startOld(){fresh();R('<h1>Castaway Commonwealth</h1><div class="card"><h2>Hobbes or Locke?</h2><p>You are the governor of a shipwrecked colony. Over six decisions, you will face problems that two famous philosophers answered very differently.</p><p><b style="color:var(--h)">Thomas Hobbes</b> believed people need a powerful ruler to escape chaos. <b style="color:var(--l)">John Locke</b> believed people have natural rights and governments exist only by their consent.</p><p>Your choices change four meters (Order, Liberty, Trust, Prosperity), unlock different events, and lead to different endings. There is no perfect answer, only trade-offs.</p><button class="go" onclick="scene()">Start the game</button></div>')}
+
+function scene(){if(S.ch>=SC.length)return fin();var sc=SC[S.ch](),i=S.ch;
+R(head()+'<div class="card"><div class="chap">Chapter '+(i+1)+' of '+SC.length+'</div><h2>'+sc.t+'</h2><p>'+sc.x+'</p>'+sc.c.map(function(c,k){return '<button class="choice" onclick="pick('+k+')">'+c.t+'<small>'+c.s+'</small></button>'}).join('')+'</div>');
+window._sc=sc}
+
+function pick(k){var c=window._sc.c[k],f=c.fx||{},bad=((f.t||0)+(f.l||0)+(f.w||0))<0&&(f.t||0)<0;
+S.o=cl(S.o+(f.o||0));S.l=cl(S.l+(f.l||0));S.t=cl(S.t+(f.t||0));S.w=cl(S.w+(f.w||0));
+S[c.p]++;S.log.push(c.p);
+if(c.a)S.ach[c.a]=1;
+var fxs=[["Order",f.o],["Liberty",f.l],["Trust",f.t],["Prosperity",f.w]].filter(function(a){return a[1]}).map(function(a){return a[0]+" "+(a[1]>0?"+":"")+a[1]}).join(", ");
+var who=c.p=="H"?"Hobbesian choice":c.p=="L"?"Lockean choice":"Blended choice";
+R(head()+'<div class="card"><div class="chap">What happened</div><div class="res'+(bad?' neg':'')+'"><p>'+c.r+'</p></div><div class="fx">'+fxs+'</div><div class="note"><span class="tag '+c.p+'">'+who+'.</span> '+c.n+'</div><button class="go" onclick="next()">'+(S.ch>=SC.length-1?"See your ending":"Next chapter")+'</button></div>');
+if(c.a)toast("Achievement: "+AL[c.a])}
+
+function next(){S.ch++;scene()}
+
+function toast(m){var d=document.createElement("div");d.className="toast";d.setAttribute("role","status");d.textContent=m;document.body.appendChild(d);setTimeout(function(){d.remove()},2600)}
+
+function fin(){var e=ending();
+if(S.H+S.M>=3&&S.H>=3&&S.L<3&&!S.ach.iron)S.ach.iron=1;
+if(S.L>=3&&!S.ach.contract)S.ach.contract=1;
+if(S.H>=2&&S.L>=2)S.ach.both=1;
+if(e[2])S.ach[e[2]]=1;
+var dc=S.H>=3&&S.H>S.L;if(dc&&!S.ach.iron)S.ach.iron=1;
+var keys=Object.keys(AL);
+R('<h1>Castaway Commonwealth</h1><div class="card"><div class="chap">Your ending</div><h2>'+e[0]+'</h2><p>'+e[1]+'</p>'+bars()+beam()+
+'<p style="margin-top:14px">You made <b style="color:var(--h)">'+S.H+' Hobbesian</b>, <b style="color:var(--l)">'+S.L+' Lockean</b> and '+S.M+' blended choices.</p>'+
+'<h2 style="font-size:1.4rem;margin-top:10px">Achievements</h2><div class="ach">'+keys.map(function(k){return S.ach[k]?'<span class="badge" title="'+ADESC[k]+'">'+AL[k]+'</span>':'<span class="badge lock" title="'+ADESC[k]+'">'+ADESC[k]+'</span>'}).join('')+'</div>'+
+'<div class="note">Try again and take the other path. A Locke-heavy run can fail through weak enforcement, and a Hobbes-heavy run can succeed in order while losing trust. Which endings can you reach?</div><button class="go" onclick="start()">Play again</button></div><div class="sig">Luke A. Hilsenrad<br>Editing status: open for Joy Knight<br>Made 11/12/26</div>')}
+var seen=false,T;
+var ar=function(x1,x2,y){return '<line x1="'+x1+'" x2="'+x2+'" y1="'+y+'" y2="'+y+'" stroke="#fff" stroke-width="3"/>'};
+var TS=[
+{t:"Meet the thinkers",h:{i:"📜",k:"Thomas Hobbes",x:"Lived through the English Civil War (1642–1651) and saw chaos up close. In 1651 he wrote Leviathan, arguing that people need a powerful ruler to stay safe."},l:{i:"🏛️",k:"John Locke",x:"Wrote Two Treatises of Government (1689) after England limited its king’s power. His ideas on rights and consent later shaped the Declaration of Independence."}},
+{t:"Life without government",h:{i:"⚔️",k:"A war of all against all",x:"With no ruler, everyone fears everyone. Nobody plants crops, builds or invents, since it could all be taken. Life is “solitary, poor, nasty, brutish, and short.”"},l:{i:"🤝",k:"Free and equal, but risky",x:"People start with natural rights to life, liberty and property, and can often get along. The problem is that nobody neutral settles disputes, so conflicts can spiral."}},
+{t:"What government is for",h:{i:"👑",k:"One sovereign keeps the peace",x:"People agree to give up power to a single ruler in exchange for safety. That power must be absolute and undivided, or conflict returns.",v:'<svg class="viz" viewBox="0 0 200 110"><circle cx="100" cy="22" r="15" fill="#ffd166"/><text x="100" y="26" style="fill:#7a1a2e">King</text>'+[30,65,100,135,170].map(function(x){return '<line x1="100" y1="37" x2="'+x+'" y2="82" stroke="#fff" opacity=".6"/><circle cx="'+x+'" cy="88" r="7" fill="#fff"/>'}).join('')+'</svg>'},l:{i:"⚖️",k:"Government protects rights",x:"People lend power to a government to protect life, liberty and property. Power is split and limited by law, so no one holds all of it.",v:'<svg class="viz" viewBox="0 0 200 110">'+[[40,"Makes laws"],[100,"Enforces"],[160,"Courts"]].map(function(a){return '<circle cx="'+a[0]+'" cy="26" r="16" fill="#ffd166"/><text x="'+a[0]+'" y="54">'+a[1]+'</text><line x1="'+a[0]+'" y1="60" x2="'+a[0]+'" y2="76" stroke="#fff"/>'}).join('')+'<rect x="15" y="76" width="170" height="24" rx="6" fill="#fff"/><text x="100" y="92" style="fill:#0b5f7a">The people’s consent</text></svg>'}},
+{t:"When government fails",h:{i:"🛡️",k:"Do not rebel",x:"Subjects should obey even a harsh ruler, because civil war is worse. The one exception is when the ruler directly threatens your life.",v:'<svg class="viz" viewBox="0 0 200 80"><rect x="10" y="25" width="60" height="30" rx="6" fill="#fff"/><text x="40" y="44" style="fill:#7a1a2e">People</text><rect x="130" y="25" width="60" height="30" rx="6" fill="#ffd166"/><text x="160" y="44" style="fill:#7a1a2e">Sovereign</text>'+ar(72,118,40)+'<polygon points="128,40 116,33 116,47" fill="#fff"/><text x="95" y="22">obey</text></svg>'},l:{i:"🗳️",k:"Right to replace",x:"If rulers break the people’s trust, the people may replace them. Government exists by consent, so it can be withdrawn.",v:'<svg class="viz" viewBox="0 0 200 80"><rect x="10" y="25" width="60" height="30" rx="6" fill="#fff"/><text x="40" y="44" style="fill:#0b5f7a">People</text><rect x="130" y="25" width="60" height="30" rx="6" fill="#ffd166"/><text x="160" y="44" style="fill:#0b5f7a">Government</text>'+ar(72,118,40)+'<polygon points="128,40 116,33 116,47" fill="#fff"/><polygon points="62,40 74,33 74,47" fill="#fff"/><text x="95" y="22">consent</text></svg>'}}
+];
+function cardIn(s,id){var d=TS[s][id.slice(1)];return '<span class="ico">'+d.i+'</span><b>'+d.k+'</b>'+(T.f[id]?'<p>'+d.x+'</p>'+(d.v||''):'<span class="hint">Tap to uncover</span>')}
+function cnt(){return Object.keys(T.f).length}
+function openTour(){T={s:0,f:{}};tour()}
+function jump(s){T.s=s;tour()}
+function reveal(id){T.f[id]=1;document.getElementById(id).innerHTML=cardIn(T.s,id);document.getElementById("cnt").textContent=cnt()}
+function tour(){var s=T.s;if(s>=TS.length)return notes();var st=TS[s];
+R('<h1>How two thinkers see government</h1><div class="split"></div><div class="card"><div class="chap">Part '+(s+1)+' of '+TS.length+' · Notes uncovered: <span id="cnt">'+cnt()+'</span> of 8</div><h2>'+st.t+'</h2><p>Tap each card to uncover what Hobbes and Locke thought. Your notes are saved for the end.</p><div class="tg">'+['h','l'].map(function(k){var id=s+k;return '<button class="pc '+k+'" id="'+id+'" onclick="reveal(\''+id+'\')">'+cardIn(s,id)+'</button>'}).join('')+'</div><div class="navs">'+(s>0?'<button class="go alt" style="margin:0" onclick="jump('+(s-1)+')">Back</button>':'')+'<button class="go" style="margin:0" onclick="jump('+(s+1)+')">'+(s==TS.length-1?"See my notes":"Next")+'</button><button class="link" onclick="scene()">Skip to the game</button></div></div>')}
+function notes(){var h='';TS.forEach(function(st,i){['h','l'].forEach(function(k){var id=i+k,d=st[k];h+=T.f[id]?'<div class="nt '+(k=='h'?'H':'L')+'"><b>'+st.t+': '+d.k+'.</b> '+d.x+'</div>':'<div class="nt miss">Not uncovered yet: '+st.t+' (<button class="link" onclick="jump('+i+')">go find it</button>)</div>'})});
+R('<h1>Your field notes</h1><div class="split"></div><div class="card"><h2>'+cnt()+' of 8 notes found</h2><p>This is everything you uncovered yourself. Red notes are Hobbes, green notes are Locke. Use them to guide your choices as governor.</p>'+h+'<div class="navs"><button class="go" style="margin:0" onclick="scene()">Start the game</button></div></div>')}
+function popup(){var d=document.createElement("div");d.className="veil";d.innerHTML='<div class="pop" role="dialog" aria-modal="true" aria-labelledby="pt"><h2 id="pt">Before you govern</h2><p>Take a short visual overview of how Hobbes and Locke each saw government, or skip it.</p><button class="go" id="tk">Take the overview</button><button class="go alt" id="sk">Skip overview</button></div>';document.body.appendChild(d);d.querySelector("#tk").onclick=function(){d.remove();openTour()};d.querySelector("#sk").onclick=function(){d.remove()};d.querySelector("#tk").focus()}
+function start(){startOld();var b=document.createElement("button");b.className="go alt";b.textContent="Replay the overview";b.onclick=openTour;document.querySelector(".card").appendChild(b);if(!seen){seen=true;popup()}}
+start();
+</script>
+</body>
+</html>
